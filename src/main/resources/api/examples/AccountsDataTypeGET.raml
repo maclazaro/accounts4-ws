@@ -1,0 +1,17 @@
+#%RAML 1.0 DataType
+
+type: object 
+properties:
+  id: number
+  firstName: string
+  lastName: string
+  address:
+    type: object
+    properties:
+      postal: string
+      country: string
+  miles: 
+    type: integer
+  creationDate: 
+    type: datetime
+  type: string

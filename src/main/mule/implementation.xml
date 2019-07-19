@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="4a44a0e3-5268-4f75-8617-8033e5755e4e" >
+		<db:my-sql-connection host="mudb.learn.mulesoft.com" port="3306" user="mule" password="mule" database="training" />
+	</db:config>
+	<flow name="getAccounts" doc:id="415b599e-3534-43c6-96fe-98aaa2d2a6d1" >
+		<db:select doc:name="Select" doc:id="99981027-a3d4-45b1-ba91-0ee24f906ea2" config-ref="Database_Config">
+			<db:sql >SELECT * 
+FROM flights_customer</db:sql>
+		</db:select>
+	</flow>
+</mule>

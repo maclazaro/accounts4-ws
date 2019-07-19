@@ -1,0 +1,61 @@
+#%RAML 1.0
+version: v1
+title: Accounts API
+
+types: 
+  AccountsGET: !include examples/AccountsDataTypeGET.raml
+  AccountsPOST: !include examples/AccountsDataTypePOST.raml
+
+traits:
+  client-id-required:
+    queryParameters:
+      client_id:
+        type: string
+      client_secret:
+        type: string
+
+/accounts:
+  is: [client-id-required]
+  get:
+    description: For retrieving accounts
+    headers: 
+      Requester-ID: 
+        required: true
+    queryParameters:
+      type: 
+        required: true
+        enum: 
+          - personal
+          - business
+      name: 
+        required: false
+      country: 
+        required: false
+    responses:
+      200:
+        body:
+          application/json:
+            type: AccountsGET[]
+            examples: !include examples/AccountsExampleGET.raml
+      400:
+        body:
+          application/json:
+            example:
+              message: Bad Request
+  post:
+    description: For creating accounts
+    body: 
+      application/json:
+        type: AccountsPOST[]
+        examples: !include examples/AccountsExamplePOST.raml
+    responses:
+      201: 
+        body:
+          application/json:
+            example:
+              message: Account created (but not really)
+      400:
+        body:
+          application/json:
+            example:
+              message: Bad Request
